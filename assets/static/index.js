@@ -30,9 +30,17 @@ function createReminder(reminder) {
  const button = document.createElement('button')
  button.type = 'submit';
  button.innerHTML = 'delete';
- button.addEventListener('submit', (e) => {
+ button.addEventListener('click', (e) => {
    e.preventDefault();
-   
+   fetch(`/reminder/${li.id}`, {
+     method: 'DELETE'
+   })
+   .then(res => res.json)
+   .then(deleted => {
+    //  getReminders();
+    document.getElementById('reminders').removeChild(li);
+   })
+   .catch( err => console.log(err))
  })
  li.append(button);
  //append li tag to ul
