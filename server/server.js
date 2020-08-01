@@ -15,8 +15,19 @@ app.get('/', (req,res) => {
 });
 
 app.post('/reminder', reminderController.postReminder, (req, res) => {
+  //returns the created reminder in db
   return res.status(200).json(res.locals.data);
-})
+});
+
+app.get('/reminder', reminderController.getReminders, (req, res) => {
+  //return an array of reminders in db
+  return res.status(200).json(res.locals.data);
+});
+
+app.delete('/reminder/:id', reminderController.deleteReminder, (req, res) => {
+  //returns the deleted object in db
+  return res.status(200).json(res.locals.data);
+});
 
 app.use('*', (req, res) => {
   res.status(404);
